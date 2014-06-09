@@ -5,6 +5,22 @@
 
 using namespace Rcpp;
 
+// rcpp_convex_minorant
+NumericVector rcpp_convex_minorant(NumericVector x, NumericVector y);
+RcppExport SEXP rqIcm_rcpp_convex_minorant(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP );
+        NumericVector __result = rcpp_convex_minorant(x, y);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // rcpp_hello_world
 List rcpp_hello_world();
 RcppExport SEXP rqIcm_rcpp_hello_world() {
