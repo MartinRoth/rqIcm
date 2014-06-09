@@ -7,12 +7,32 @@
 using namespace std;
 using namespace Rcpp;
 
-//' The length of a string (in characters).
+//Computes the slopes of the convex minorant given the points of the lower convex hull
+//The arguments could be changed to double vectors
+NumericVector compute_slopes(NumericVector x, NumericVector y) {
+  double        startValue = y[0];
+  NumericVector xDiff      = diff(x);
+  NumericVector yDiff      = diff(y);
+  int           nxd        = xDiff.length();
+
+  vector<double> tmp;
+  tmp.push_back(startValue);
+  for (int i = 0; i < nxd; i++) {
+    for (int j = 0; j < xDiff[i]; j++) {
+      tmp.push_back( yDiff[i] / xDiff[i]);
+    }
+  }
+  vector<double> tmp2;
+  partial_sum(tmp.begin(), tmp.end(), back_inserter(tmp2));
+  return Rcpp::wrap(tmp2);
+}
+
+//' Returns the convex minorant of a polygon.
 //'
 //' @param str input character vector
 //' @return characters in each element of the vector
 // [[Rcpp::export]]
-NumericVector rcpp_convex_minorant(NumericVector x, NumericVector y) {
+List rcpp_convex_minorant(NumericVector x, NumericVector y) {
 //NumericVector convexMinorant(NumericVector y, NumericVector x) {
   
   //Rcout << "Convex minorant started" << std::endl;
@@ -22,12 +42,12 @@ NumericVector rcpp_convex_minorant(NumericVector x, NumericVector y) {
   NumericVector XX = x; //cumsum(x);
   NumericVector XY = y; //cumsum(y);
   
-  vector<Point> P(ny + 1);
-  P[0].x = 0.0, P[0].y =0.0;
+  vector<Point> P(ny);
+  //P[0].x = 0.0, P[0].y =0.0;
   
-  for (int i = 1; i < ny + 1; i++) {
-    P[i].x = XX[i-1];
-    P[i].y = XY[i-1];
+  for (int i = 0; i < ny; i++) {
+    P[i].x = XX[i];
+    P[i].y = XY[i];
   }
   
   //Rcout << "Points are initialized" << std::endl;
@@ -36,38 +56,19 @@ NumericVector rcpp_convex_minorant(NumericVector x, NumericVector y) {
   
   int            nP = convHull.size();
   //Rcout << "nP equals " << nP << std::endl;
-  vector<int>    convHullX(nP + 1); 
-  vector<double> convHullY(nP + 1); 
-  convHullX[0] = 0;                 
-  convHullY[0] = 0;                 
+  vector<int>    convHullX(nP); 
+  vector<double> convHullY(nP); 
+  //convHullX[0] = 0;                 
+  //convHullY[0] = 0;                 
   for (int i = 0; i < nP; i++) {
-    convHullX[i+1] = convHull.at(i).x;
-    convHullY[i+1] = convHull.at(i).y;
+    convHullX[i] = convHull.at(i).x;
+    convHullY[i] = convHull.at(i).y;
   }
   //Rcout << "Points separated" << std::endl;
   
   NumericVector XXX  = Rcpp::wrap(convHullX);
   NumericVector XYY  = Rcpp::wrap(convHullY);
-  NumericVector xDiff = diff(XXX);
-  NumericVector yDiff = diff(XYY);
-  
-  //Rcout << "size xDiff =" << xDiff.length() << std::endl;
-  //Rcout << "np =" << nP << std::endl;
-  
-  //Rcout << "Some computations" << std::endl;
-  vector<double> tmp;
-  for (int i = 0; i < nP; i++) {
-    for (int j = 0; j < xDiff[i]; j++) {
-      //Rcout << "yDiff is" << yDiff[i] << std::endl;
-      //Rcout << "xDiff is" << xDiff[i] << std::endl;
-      tmp.push_back(yDiff[i] / xDiff[i]);
-    }
-  }
-  //if(tmp[ny-1] < tmp[ny-2]) tmp[ny-1] = tmp[ny-2];
-  
-  //Rcout << "Convex minorant algoritm finished" << std::endl;
-  
-  NumericVector newBeta = Rcpp::wrap(tmp);
-  return newBeta;
-  //return List::create(Named("slopes") = newBeta, Named("x") = XXX, Named("y") = XYY);
+  NumericVector newBeta = compute_slopes(XXX, XYY);
+  //return newBeta;
+  return List::create(Named("slopes") = newBeta, Named("x") = XXX, Named("y") = XYY);
 }
