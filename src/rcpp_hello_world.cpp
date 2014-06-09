@@ -2,6 +2,7 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+//' I can do my own documentation
 // [[Rcpp::export]]
 List rcpp_hello_world() {
    
