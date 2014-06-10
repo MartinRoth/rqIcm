@@ -35,8 +35,8 @@ NumericVector convexMinorant(NumericVector x, NumericVector y) {
   
   int ny = y.length();
 
-  NumericVector XX = x; //cumsum(x);
-  NumericVector XY = y; //cumsum(y);
+  NumericVector XX = x; 
+  NumericVector XY = y; 
   
   vector<Point> P(ny);
   for (int i = 0; i < ny; i++) {
@@ -56,7 +56,7 @@ NumericVector convexMinorant(NumericVector x, NumericVector y) {
   
   NumericVector XXX     = Rcpp::wrap(convHullX);
   NumericVector XYY     = Rcpp::wrap(convHullY);
-  NumericVector newBeta = compute_slopes(XXX, XYY);
-  return newBeta;
+  NumericVector slopes  = compute_slopes(XXX, XYY);
+  return slopes;
   //return List::create(Named("slopes") = newBeta, Named("x") = XXX, Named("y") = XYY);
 }

@@ -35,16 +35,21 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
-// convexMinorantCumSum
-NumericVector convexMinorantCumSum(NumericVector x, NumericVector y);
-RcppExport SEXP rqIcm_convexMinorantCumSum(SEXP xSEXP, SEXP ySEXP) {
+// rqIcmStep
+NumericVector rqIcmStep(NumericVector y, NumericVector beta, NumericVector blockLength, float tau, float lambda, std::string method, float c);
+RcppExport SEXP rqIcm_rqIcmStep(SEXP ySEXP, SEXP betaSEXP, SEXP blockLengthSEXP, SEXP tauSEXP, SEXP lambdaSEXP, SEXP methodSEXP, SEXP cSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP );
         Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP );
-        NumericVector __result = convexMinorantCumSum(x, y);
+        Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type blockLength(blockLengthSEXP );
+        Rcpp::traits::input_parameter< float >::type tau(tauSEXP );
+        Rcpp::traits::input_parameter< float >::type lambda(lambdaSEXP );
+        Rcpp::traits::input_parameter< std::string >::type method(methodSEXP );
+        Rcpp::traits::input_parameter< float >::type c(cSEXP );
+        NumericVector __result = rqIcmStep(y, beta, blockLength, tau, lambda, method, c);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

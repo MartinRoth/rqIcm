@@ -13,9 +13,8 @@ rcpp_hello_world <- function() {
     .Call('rqIcm_rcpp_hello_world', PACKAGE = 'rqIcm')
 }
 
-#'Computes the convex minorant of the cumulative sum
-convexMinorantCumSum <- function(x, y) {
-    .Call('rqIcm_convexMinorantCumSum', PACKAGE = 'rqIcm', x, y)
+rqIcmStep <- function(y, beta, blockLength, tau, lambda, method, c) {
+    .Call('rqIcm_rqIcmStep', PACKAGE = 'rqIcm', y, beta, blockLength, tau, lambda, method, c)
 }
 
 rqIcm <- function(y, beta, blockLength, tau, lambda = 0, method = "1order") {

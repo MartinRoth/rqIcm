@@ -1,11 +1,11 @@
 Package: rqIcm
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
-Date: 2014-06-09
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
+Title: Isotone quantile regression
+Version: 0.1
+Date: 2014-06-10
+Author: M. Roth
+Maintainer: M.Roth <mroth@tue.nl>
+Description: Uses the iterative convex minorant algorithm for monotone regression
 License: What Licence is it under ?
 Imports: Rcpp (>= 0.11.1)
 LinkingTo: Rcpp
