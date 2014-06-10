@@ -5,16 +5,16 @@
 
 using namespace Rcpp;
 
-// rcpp_convex_minorant
-List rcpp_convex_minorant(NumericVector x, NumericVector y);
-RcppExport SEXP rqIcm_rcpp_convex_minorant(SEXP xSEXP, SEXP ySEXP) {
+// convexMinorant
+NumericVector convexMinorant(NumericVector y, NumericVector x);
+RcppExport SEXP rqIcm_convexMinorant(SEXP ySEXP, SEXP xSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP );
         Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP );
-        List __result = rcpp_convex_minorant(x, y);
+        Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP );
+        NumericVector __result = convexMinorant(y, x);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
@@ -29,6 +29,81 @@ BEGIN_RCPP
     {
         Rcpp::RNGScope __rngScope;
         List __result = rcpp_hello_world();
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// completeBetaCpp
+NumericVector completeBetaCpp(NumericVector beta, NumericVector blockLength);
+RcppExport SEXP rqIcm_completeBetaCpp(SEXP betaSEXP, SEXP blockLengthSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type blockLength(blockLengthSEXP );
+        NumericVector __result = completeBetaCpp(beta, blockLength);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// rqSmooth
+double rqSmooth(NumericVector y, NumericVector beta, NumericVector blockLength, float tau, float lambda = 0.0, std::string method = "1order", float c = 0.1);
+RcppExport SEXP rqIcm_rqSmooth(SEXP ySEXP, SEXP betaSEXP, SEXP blockLengthSEXP, SEXP tauSEXP, SEXP lambdaSEXP, SEXP methodSEXP, SEXP cSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type blockLength(blockLengthSEXP );
+        Rcpp::traits::input_parameter< float >::type tau(tauSEXP );
+        Rcpp::traits::input_parameter< float >::type lambda(lambdaSEXP );
+        Rcpp::traits::input_parameter< std::string >::type method(methodSEXP );
+        Rcpp::traits::input_parameter< float >::type c(cSEXP );
+        double __result = rqSmooth(y, beta, blockLength, tau, lambda, method, c);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// rqSmoothRegional
+double rqSmoothRegional(NumericMatrix y, NumericVector beta, NumericVector blockLength, float tau, float lambda = 0.0, std::string method = "1order", float c = 0.1);
+RcppExport SEXP rqIcm_rqSmoothRegional(SEXP ySEXP, SEXP betaSEXP, SEXP blockLengthSEXP, SEXP tauSEXP, SEXP lambdaSEXP, SEXP methodSEXP, SEXP cSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< NumericMatrix >::type y(ySEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type blockLength(blockLengthSEXP );
+        Rcpp::traits::input_parameter< float >::type tau(tauSEXP );
+        Rcpp::traits::input_parameter< float >::type lambda(lambdaSEXP );
+        Rcpp::traits::input_parameter< std::string >::type method(methodSEXP );
+        Rcpp::traits::input_parameter< float >::type c(cSEXP );
+        double __result = rqSmoothRegional(y, beta, blockLength, tau, lambda, method, c);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// penaltyCpp
+double penaltyCpp(NumericVector beta, float lambda, std::string method = "1order");
+RcppExport SEXP rqIcm_penaltyCpp(SEXP betaSEXP, SEXP lambdaSEXP, SEXP methodSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP );
+        Rcpp::traits::input_parameter< float >::type lambda(lambdaSEXP );
+        Rcpp::traits::input_parameter< std::string >::type method(methodSEXP );
+        double __result = penaltyCpp(beta, lambda, method);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
