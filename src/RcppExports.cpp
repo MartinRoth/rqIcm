@@ -6,15 +6,15 @@
 using namespace Rcpp;
 
 // convexMinorant
-NumericVector convexMinorant(NumericVector y, NumericVector x);
-RcppExport SEXP rqIcm_convexMinorant(SEXP ySEXP, SEXP xSEXP) {
+NumericVector convexMinorant(NumericVector x, NumericVector y);
+RcppExport SEXP rqIcm_convexMinorant(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP );
         Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP );
-        NumericVector __result = convexMinorant(y, x);
+        Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP );
+        NumericVector __result = convexMinorant(x, y);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
@@ -29,6 +29,62 @@ BEGIN_RCPP
     {
         Rcpp::RNGScope __rngScope;
         List __result = rcpp_hello_world();
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// convexMinorantCumSum
+NumericVector convexMinorantCumSum(NumericVector x, NumericVector y);
+RcppExport SEXP rqIcm_convexMinorantCumSum(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP );
+        NumericVector __result = convexMinorantCumSum(x, y);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// rqIcm
+List rqIcm(NumericVector y, NumericVector beta, NumericVector blockLength, float tau, float lambda = 0, std::string method = "1order");
+RcppExport SEXP rqIcm_rqIcm(SEXP ySEXP, SEXP betaSEXP, SEXP blockLengthSEXP, SEXP tauSEXP, SEXP lambdaSEXP, SEXP methodSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type blockLength(blockLengthSEXP );
+        Rcpp::traits::input_parameter< float >::type tau(tauSEXP );
+        Rcpp::traits::input_parameter< float >::type lambda(lambdaSEXP );
+        Rcpp::traits::input_parameter< std::string >::type method(methodSEXP );
+        List __result = rqIcm(y, beta, blockLength, tau, lambda, method);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// rqIcmRegional
+List rqIcmRegional(NumericMatrix y, NumericVector beta, NumericVector blockLength, float tau, float lambda = 0, std::string method = "1order");
+RcppExport SEXP rqIcm_rqIcmRegional(SEXP ySEXP, SEXP betaSEXP, SEXP blockLengthSEXP, SEXP tauSEXP, SEXP lambdaSEXP, SEXP methodSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< NumericMatrix >::type y(ySEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type blockLength(blockLengthSEXP );
+        Rcpp::traits::input_parameter< float >::type tau(tauSEXP );
+        Rcpp::traits::input_parameter< float >::type lambda(lambdaSEXP );
+        Rcpp::traits::input_parameter< std::string >::type method(methodSEXP );
+        List __result = rqIcmRegional(y, beta, blockLength, tau, lambda, method);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

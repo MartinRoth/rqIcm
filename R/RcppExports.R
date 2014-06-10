@@ -4,13 +4,26 @@
 #' Computes the convex minorant of a polygon.
 #'
 #' @return vector of the y-coordinates of the convex minorant
-convexMinorant <- function(y, x) {
-    .Call('rqIcm_convexMinorant', PACKAGE = 'rqIcm', y, x)
+convexMinorant <- function(x, y) {
+    .Call('rqIcm_convexMinorant', PACKAGE = 'rqIcm', x, y)
 }
 
 #' I can do my own documentation
 rcpp_hello_world <- function() {
     .Call('rqIcm_rcpp_hello_world', PACKAGE = 'rqIcm')
+}
+
+#'Computes the convex minorant of the cumulative sum
+convexMinorantCumSum <- function(x, y) {
+    .Call('rqIcm_convexMinorantCumSum', PACKAGE = 'rqIcm', x, y)
+}
+
+rqIcm <- function(y, beta, blockLength, tau, lambda = 0, method = "1order") {
+    .Call('rqIcm_rqIcm', PACKAGE = 'rqIcm', y, beta, blockLength, tau, lambda, method)
+}
+
+rqIcmRegional <- function(y, beta, blockLength, tau, lambda = 0, method = "1order") {
+    .Call('rqIcm_rqIcmRegional', PACKAGE = 'rqIcm', y, beta, blockLength, tau, lambda, method)
 }
 
 #' Extends the parameter vector to the natural dimension

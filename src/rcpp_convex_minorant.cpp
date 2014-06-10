@@ -31,7 +31,7 @@ NumericVector compute_slopes(NumericVector x, NumericVector y) {
 //'
 //' @return vector of the y-coordinates of the convex minorant
 // [[Rcpp::export]]
-NumericVector convexMinorant(NumericVector y, NumericVector x) {
+NumericVector convexMinorant(NumericVector x, NumericVector y) {
   
   int ny = y.length();
 
